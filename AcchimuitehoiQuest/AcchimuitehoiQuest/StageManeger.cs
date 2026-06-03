@@ -7,7 +7,7 @@ using WindowsFormsApp1;
 
 
 
-namespace WindowsFormsApp1
+namespace AcchimuitehoiQuest
     {
     
         public class StageManager
