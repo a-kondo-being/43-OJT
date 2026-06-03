@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F81E7E4F-F3B2-4C40-A758-9BFFE402C3CE}</ProjectGuid>
+    <ProjectGuid>{EF57052A-7663-41E6-97EE-A2C5AC275F17}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>AcchimuitehoiQuest</RootNamespace>
     <AssemblyName>AcchimuitehoiQuest</AssemblyName>
