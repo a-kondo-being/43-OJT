@@ -21,10 +21,10 @@ namespace WindowsFormsApp1
         }
 
 
-        public static Enemy CreateGoblin()                            // ステージ2用：ゴブリンを作成して返す
+        public static Enemy CreateGolem()                            // ステージ2用：ゴブリンを作成して返す
         {
             Enemy enemy = new Enemy();
-            enemy.Name = "ゴブリン";
+            enemy.Name = "ゴーレム";
             enemy.HP = 2;
             enemy.TargetDirection = 2;                                // 例：左を向きやすい
             return enemy;
