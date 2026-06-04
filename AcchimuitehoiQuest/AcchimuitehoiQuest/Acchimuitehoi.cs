@@ -3,14 +3,6 @@ using System.Collections.Generic;
 
 namespace AcchimuitehoiQuest
 {
-    public enum Direction
-    {
-        Up = 0,
-        Down = 1,
-        Left = 2,
-        Right = 3,
-    }
-
     public class AcchimuitehoiLogic
     {
         public enum Direction
