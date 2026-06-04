@@ -46,17 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
     <Compile Include="Acchimuitehoi.cs" />
-<<<<<<< HEAD
-    <Compile Include="enem.cs" />
-=======
->>>>>>> 797a5e6abcb0b5ff6eba0f220ed5a8b89fd0b937
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     <Compile Include="Enemy.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
