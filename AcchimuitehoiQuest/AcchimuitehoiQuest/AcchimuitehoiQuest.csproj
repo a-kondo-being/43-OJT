@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Acchimuitehoi.cs" />
     <Compile Include="BattleManager.cs" />
+    <Compile Include="GameJudge.cs" />
     <Compile Include="Jannkenn.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="TitleForm.cs">

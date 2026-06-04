@@ -16,7 +16,7 @@ namespace AcchimuitehoiQuest
         public BattleManager()
         {
             this.PlayerHP = 3;                      // プレイヤーのHPは初期値3
-            this.CurrentPhase = "じゃんけん";
+            this.CurrentPhase = "バトル";
         }
         public void SetupEnemy(Enemy enemy)        // 戦いを始めるときの処理（台本）
         {
@@ -40,7 +40,7 @@ namespace AcchimuitehoiQuest
             // 【ガード節1】失敗した場合は、じゃんけんに戻してすぐ処理を終了する
             if (!isSuccess)
             {
-                this.CurrentPhase = "じゃんけん";
+                this.CurrentPhase = "バトル";
                 return;
             }
 
