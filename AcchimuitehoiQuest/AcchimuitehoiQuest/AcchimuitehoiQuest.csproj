@@ -49,6 +49,12 @@
     <Compile Include="Acchimuitehoi.cs" />
     <Compile Include="BattleManager.cs" />
     <Compile Include="GameJudge.cs" />
+    <Compile Include="GameOveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameOveForm.Designer.cs">
+      <DependentUpon>GameOveForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Jannkenn.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="ResultForm.cs">
@@ -66,6 +72,9 @@
     <Compile Include="TitleForm.Designer.cs">
       <DependentUpon>TitleForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="GameOveForm.resx">
+      <DependentUpon>GameOveForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ResultForm.resx">
       <DependentUpon>ResultForm.cs</DependentUpon>
     </EmbeddedResource>
