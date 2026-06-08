@@ -14,7 +14,7 @@ namespace AcchimuitehoiQuest
         }
         private void buttonToTitle_Click(object sender, EventArgs e)
         {
-            Application.Restart();
+            Application.Exit();
         }
     }
 }

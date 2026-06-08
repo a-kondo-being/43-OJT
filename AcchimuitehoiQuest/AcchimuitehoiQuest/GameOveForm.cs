@@ -18,12 +18,7 @@ namespace AcchimuitehoiQuest
         }
         private void buttonBacktoTitle_Click(object sender, EventArgs e)
         {
-            Application.Restart();
-        }
-
-        private void GameOvweForm_Load(object sender, EventArgs e)
-        {
-
+            Application.Exit();
         }
     }
 }
