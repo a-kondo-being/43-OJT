@@ -57,14 +57,6 @@
     </Compile>
     <Compile Include="Jannkenn.cs" />
     <Compile Include="Enemy.cs" />
-<<<<<<< HEAD
-    <Compile Include="QuestForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="QuestForm.Designer.cs">
-      <DependentUpon>QuestForm.cs</DependentUpon>
-    </Compile>
-=======
     <Compile Include="ResultForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,29 +66,17 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StageManeger.cs" />
->>>>>>> develop
     <Compile Include="TitleForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TitleForm.Designer.cs">
       <DependentUpon>TitleForm.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StageManeger.cs" />
-    <EmbeddedResource Include="QuestForm.resx">
-      <DependentUpon>QuestForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TitleForm.resx">
-      <DependentUpon>TitleForm.cs</DependentUpon>
-=======
     <EmbeddedResource Include="GameOveForm.resx">
       <DependentUpon>GameOveForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResultForm.resx">
       <DependentUpon>ResultForm.cs</DependentUpon>
->>>>>>> develop
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -126,12 +106,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\スクリーンショット 2026-06-04 132756.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Picture\ゴーレムダウンロード.png" />
-    <Content Include="Picture\スライムダウンロード %281%29.pngooo[[[.png" />
-    <Content Include="Picture\魔王ダウンロード.png" />
-    <Content Include="Picture\魔王背景1327×829.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

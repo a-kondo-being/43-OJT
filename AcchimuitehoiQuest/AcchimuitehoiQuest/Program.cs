@@ -13,7 +13,7 @@ namespace AcchimuitehoiQuest
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new QuestForm());
+            Application.Run(new TitleForm());
         }
     }
 }
