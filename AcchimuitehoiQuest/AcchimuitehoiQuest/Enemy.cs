@@ -1,6 +1,6 @@
 ﻿// 【完了基準クリア】エネミークラスの実装
 
-namespace WindowsFormsApp1
+namespace AcchimuitehoiQuest
 {
 
     public class Enemy
