@@ -23,5 +23,10 @@ namespace AcchimuitehoiQuest
             this.Hide();
 
         }
+
+        private void TitleForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

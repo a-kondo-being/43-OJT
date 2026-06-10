@@ -55,23 +55,51 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GameJudge.cs" />
+    <Compile Include="GameOveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameOveForm.Designer.cs">
+      <DependentUpon>GameOveForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Jannkenn.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="player.cs" />
+    <Compile Include="ResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResultForm.Designer.cs">
+      <DependentUpon>ResultForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StageManeger.cs" />
+    <Compile Include="QuestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuestForm.Designer.cs">
+      <DependentUpon>QuestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TitleForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TitleForm.Designer.cs">
       <DependentUpon>TitleForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StageManeger.cs" />
     <EmbeddedResource Include="BattleForm.resx">
       <DependentUpon>BattleForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GameOveForm.resx">
+      <DependentUpon>GameOveForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResultForm.resx">
+      <DependentUpon>ResultForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestForm.resx">
+      <DependentUpon>QuestForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TitleForm.resx">
       <DependentUpon>TitleForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -98,6 +126,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\スクリーンショット 2026-06-04 132756.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Picture\ゴーレムダウンロード.png" />
+    <Content Include="Picture\スライムダウンロード %281%29.png" />
+    <Content Include="Picture\魔王ダウンロード.png" />
+    <Content Include="Picture\魔王背景1327×829.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
