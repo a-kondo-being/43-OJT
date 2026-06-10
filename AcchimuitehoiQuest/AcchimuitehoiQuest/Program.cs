@@ -11,9 +11,15 @@ namespace AcchimuitehoiQuest
         [STAThread]
         static void Main()
         {
+            // スタートボタンなどが押されたときの処理
+            StageManager stageManager = new StageManager();
+
+            // SetupNextStage()を呼ぶと、CurrentStageNumberが1になり、スライムがCurrentEnemyに入る！
+            stageManager.SetupNextStage();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new QuestForm());
+            Application.Run(new BattleForm(stageManager));
         }
     }
 }

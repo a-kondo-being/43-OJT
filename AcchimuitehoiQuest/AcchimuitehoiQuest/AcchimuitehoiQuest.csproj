@@ -47,7 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acchimuitehoi.cs" />
+    <Compile Include="BattleForm.Designer.cs">
+      <DependentUpon>BattleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="BattleManager.cs" />
+    <Compile Include="BattleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GameJudge.cs" />
     <Compile Include="GameOveForm.cs">
       <SubType>Form</SubType>
@@ -57,6 +63,7 @@
     </Compile>
     <Compile Include="Jannkenn.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="player.cs" />
     <Compile Include="ResultForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +85,9 @@
     <Compile Include="TitleForm.Designer.cs">
       <DependentUpon>TitleForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="BattleForm.resx">
+      <DependentUpon>BattleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GameOveForm.resx">
       <DependentUpon>GameOveForm.cs</DependentUpon>
     </EmbeddedResource>

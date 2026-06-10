@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AcchiMuiteHoiQuest
+namespace AcchiMuitehoiQuest
 {
     public class Jannkenn
     {
