@@ -40,6 +40,7 @@ namespace AcchimuitehoiQuest
             this.PlayerHP3 = new System.Windows.Forms.PictureBox();
             this.SlimeHP = new System.Windows.Forms.PictureBox();
             this.GolemHpPanel = new System.Windows.Forms.Panel();
+            this.GolemHP1 = new System.Windows.Forms.PictureBox();
             this.GolemHP2 = new System.Windows.Forms.PictureBox();
             this.EnemyHand = new System.Windows.Forms.PictureBox();
             this.PanelPointing = new System.Windows.Forms.Panel();
@@ -47,7 +48,6 @@ namespace AcchimuitehoiQuest
             this.ArrowDown = new System.Windows.Forms.Button();
             this.ArrowLeft = new System.Windows.Forms.Button();
             this.ArrowUp = new System.Windows.Forms.Button();
-            this.GolemHP1 = new System.Windows.Forms.PictureBox();
             this.SlimeHpPanel = new System.Windows.Forms.Panel();
             this.DemonHpPanel = new System.Windows.Forms.Panel();
             this.DemonHP3 = new System.Windows.Forms.PictureBox();
@@ -60,10 +60,10 @@ namespace AcchimuitehoiQuest
             ((System.ComponentModel.ISupportInitialize)(this.PlayerHP3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SlimeHP)).BeginInit();
             this.GolemHpPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GolemHP1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GolemHP2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EnemyHand)).BeginInit();
             this.PanelPointing.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GolemHP1)).BeginInit();
             this.SlimeHpPanel.SuspendLayout();
             this.DemonHpPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DemonHP3)).BeginInit();
@@ -74,11 +74,11 @@ namespace AcchimuitehoiQuest
             // EnemyApperance
             // 
             this.EnemyApperance.BackColor = System.Drawing.Color.Transparent;
-            this.EnemyApperance.BackgroundImage = global::AcchimuitehoiQuest.Properties.Resources.スライム正面_removebg_preview;
             this.EnemyApperance.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.EnemyApperance.Location = new System.Drawing.Point(411, 173);
+            this.EnemyApperance.Location = new System.Drawing.Point(685, 260);
+            this.EnemyApperance.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.EnemyApperance.Name = "EnemyApperance";
-            this.EnemyApperance.Size = new System.Drawing.Size(509, 295);
+            this.EnemyApperance.Size = new System.Drawing.Size(848, 442);
             this.EnemyApperance.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.EnemyApperance.TabIndex = 0;
             this.EnemyApperance.TabStop = false;
@@ -90,18 +90,20 @@ namespace AcchimuitehoiQuest
             this.HandPanel.Controls.Add(this.PlayerHandPa);
             this.HandPanel.Controls.Add(this.PlayerHandChoki);
             this.HandPanel.Controls.Add(this.PlayerHandGu);
-            this.HandPanel.Location = new System.Drawing.Point(76, 526);
+            this.HandPanel.Location = new System.Drawing.Point(125, 670);
+            this.HandPanel.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.HandPanel.Name = "HandPanel";
-            this.HandPanel.Size = new System.Drawing.Size(1141, 252);
+            this.HandPanel.Size = new System.Drawing.Size(1902, 378);
             this.HandPanel.TabIndex = 1;
             // 
             // PlayerHandPa
             // 
             this.PlayerHandPa.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PlayerHandPa.BackgroundImage")));
             this.PlayerHandPa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PlayerHandPa.Location = new System.Drawing.Point(865, 18);
+            this.PlayerHandPa.Location = new System.Drawing.Point(1442, 27);
+            this.PlayerHandPa.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.PlayerHandPa.Name = "PlayerHandPa";
-            this.PlayerHandPa.Size = new System.Drawing.Size(212, 217);
+            this.PlayerHandPa.Size = new System.Drawing.Size(353, 326);
             this.PlayerHandPa.TabIndex = 14;
             this.PlayerHandPa.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.PlayerHandPa.UseVisualStyleBackColor = true;
@@ -111,9 +113,10 @@ namespace AcchimuitehoiQuest
             // 
             this.PlayerHandChoki.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PlayerHandChoki.BackgroundImage")));
             this.PlayerHandChoki.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PlayerHandChoki.Location = new System.Drawing.Point(461, 18);
+            this.PlayerHandChoki.Location = new System.Drawing.Point(768, 27);
+            this.PlayerHandChoki.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.PlayerHandChoki.Name = "PlayerHandChoki";
-            this.PlayerHandChoki.Size = new System.Drawing.Size(212, 217);
+            this.PlayerHandChoki.Size = new System.Drawing.Size(353, 326);
             this.PlayerHandChoki.TabIndex = 13;
             this.PlayerHandChoki.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.PlayerHandChoki.UseVisualStyleBackColor = true;
@@ -123,9 +126,10 @@ namespace AcchimuitehoiQuest
             // 
             this.PlayerHandGu.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PlayerHandGu.BackgroundImage")));
             this.PlayerHandGu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PlayerHandGu.Location = new System.Drawing.Point(70, 23);
+            this.PlayerHandGu.Location = new System.Drawing.Point(117, 34);
+            this.PlayerHandGu.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.PlayerHandGu.Name = "PlayerHandGu";
-            this.PlayerHandGu.Size = new System.Drawing.Size(212, 217);
+            this.PlayerHandGu.Size = new System.Drawing.Size(353, 326);
             this.PlayerHandGu.TabIndex = 12;
             this.PlayerHandGu.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.PlayerHandGu.UseVisualStyleBackColor = true;
@@ -136,9 +140,10 @@ namespace AcchimuitehoiQuest
             this.lblMessage.BackColor = System.Drawing.SystemColors.MenuText;
             this.lblMessage.Font = new System.Drawing.Font("メイリオ", 18F, System.Drawing.FontStyle.Bold);
             this.lblMessage.ForeColor = System.Drawing.Color.White;
-            this.lblMessage.Location = new System.Drawing.Point(144, 65);
+            this.lblMessage.Location = new System.Drawing.Point(240, 98);
+            this.lblMessage.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(1009, 105);
+            this.lblMessage.Size = new System.Drawing.Size(1682, 158);
             this.lblMessage.TabIndex = 2;
             this.lblMessage.Text = "あいうえお";
             this.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -148,9 +153,10 @@ namespace AcchimuitehoiQuest
             this.PlayerHP1.BackColor = System.Drawing.Color.Transparent;
             this.PlayerHP1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PlayerHP1.BackgroundImage")));
             this.PlayerHP1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PlayerHP1.Location = new System.Drawing.Point(0, 1);
+            this.PlayerHP1.Location = new System.Drawing.Point(0, 2);
+            this.PlayerHP1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.PlayerHP1.Name = "PlayerHP1";
-            this.PlayerHP1.Size = new System.Drawing.Size(50, 50);
+            this.PlayerHP1.Size = new System.Drawing.Size(83, 75);
             this.PlayerHP1.TabIndex = 3;
             this.PlayerHP1.TabStop = false;
             // 
@@ -159,9 +165,10 @@ namespace AcchimuitehoiQuest
             this.PlayerHP2.BackColor = System.Drawing.Color.Transparent;
             this.PlayerHP2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PlayerHP2.BackgroundImage")));
             this.PlayerHP2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PlayerHP2.Location = new System.Drawing.Point(47, 1);
+            this.PlayerHP2.Location = new System.Drawing.Point(78, 2);
+            this.PlayerHP2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.PlayerHP2.Name = "PlayerHP2";
-            this.PlayerHP2.Size = new System.Drawing.Size(50, 50);
+            this.PlayerHP2.Size = new System.Drawing.Size(83, 75);
             this.PlayerHP2.TabIndex = 4;
             this.PlayerHP2.TabStop = false;
             // 
@@ -170,9 +177,10 @@ namespace AcchimuitehoiQuest
             this.PlayerHP3.BackColor = System.Drawing.Color.Transparent;
             this.PlayerHP3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PlayerHP3.BackgroundImage")));
             this.PlayerHP3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PlayerHP3.Location = new System.Drawing.Point(97, 1);
+            this.PlayerHP3.Location = new System.Drawing.Point(162, 2);
+            this.PlayerHP3.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.PlayerHP3.Name = "PlayerHP3";
-            this.PlayerHP3.Size = new System.Drawing.Size(50, 50);
+            this.PlayerHP3.Size = new System.Drawing.Size(83, 75);
             this.PlayerHP3.TabIndex = 5;
             this.PlayerHP3.TabStop = false;
             // 
@@ -181,9 +189,10 @@ namespace AcchimuitehoiQuest
             this.SlimeHP.BackColor = System.Drawing.Color.Transparent;
             this.SlimeHP.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SlimeHP.BackgroundImage")));
             this.SlimeHP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.SlimeHP.Location = new System.Drawing.Point(0, 3);
+            this.SlimeHP.Location = new System.Drawing.Point(0, 4);
+            this.SlimeHP.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.SlimeHP.Name = "SlimeHP";
-            this.SlimeHP.Size = new System.Drawing.Size(50, 50);
+            this.SlimeHP.Size = new System.Drawing.Size(83, 75);
             this.SlimeHP.TabIndex = 6;
             this.SlimeHP.TabStop = false;
             this.SlimeHP.Click += new System.EventHandler(this.SlimeHP_Click);
@@ -193,20 +202,35 @@ namespace AcchimuitehoiQuest
             this.GolemHpPanel.BackColor = System.Drawing.Color.Transparent;
             this.GolemHpPanel.Controls.Add(this.GolemHP1);
             this.GolemHpPanel.Controls.Add(this.GolemHP2);
-            this.GolemHpPanel.Location = new System.Drawing.Point(800, 190);
+            this.GolemHpPanel.Location = new System.Drawing.Point(1333, 285);
+            this.GolemHpPanel.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.GolemHpPanel.Name = "GolemHpPanel";
-            this.GolemHpPanel.Size = new System.Drawing.Size(98, 53);
+            this.GolemHpPanel.Size = new System.Drawing.Size(163, 80);
             this.GolemHpPanel.TabIndex = 9;
             this.GolemHpPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.GolemHp_Paint);
+            // 
+            // GolemHP1
+            // 
+            this.GolemHP1.BackColor = System.Drawing.Color.Transparent;
+            this.GolemHP1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("GolemHP1.BackgroundImage")));
+            this.GolemHP1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.GolemHP1.Location = new System.Drawing.Point(-3, 0);
+            this.GolemHP1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.GolemHP1.Name = "GolemHP1";
+            this.GolemHP1.Size = new System.Drawing.Size(83, 75);
+            this.GolemHP1.TabIndex = 7;
+            this.GolemHP1.TabStop = false;
+            this.GolemHP1.Click += new System.EventHandler(this.GolemHP1_Click);
             // 
             // GolemHP2
             // 
             this.GolemHP2.BackColor = System.Drawing.Color.Transparent;
             this.GolemHP2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("GolemHP2.BackgroundImage")));
             this.GolemHP2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.GolemHP2.Location = new System.Drawing.Point(47, 0);
+            this.GolemHP2.Location = new System.Drawing.Point(78, 0);
+            this.GolemHP2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.GolemHP2.Name = "GolemHP2";
-            this.GolemHP2.Size = new System.Drawing.Size(50, 50);
+            this.GolemHP2.Size = new System.Drawing.Size(83, 75);
             this.GolemHP2.TabIndex = 8;
             this.GolemHP2.TabStop = false;
             // 
@@ -214,9 +238,10 @@ namespace AcchimuitehoiQuest
             // 
             this.EnemyHand.BackColor = System.Drawing.SystemColors.Desktop;
             this.EnemyHand.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.EnemyHand.Location = new System.Drawing.Point(366, 285);
+            this.EnemyHand.Location = new System.Drawing.Point(610, 428);
+            this.EnemyHand.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.EnemyHand.Name = "EnemyHand";
-            this.EnemyHand.Size = new System.Drawing.Size(150, 120);
+            this.EnemyHand.Size = new System.Drawing.Size(250, 180);
             this.EnemyHand.TabIndex = 10;
             this.EnemyHand.TabStop = false;
             this.EnemyHand.Click += new System.EventHandler(this.EnemyHand_Click);
@@ -228,9 +253,10 @@ namespace AcchimuitehoiQuest
             this.PanelPointing.Controls.Add(this.ArrowDown);
             this.PanelPointing.Controls.Add(this.ArrowLeft);
             this.PanelPointing.Controls.Add(this.ArrowUp);
-            this.PanelPointing.Location = new System.Drawing.Point(337, 449);
+            this.PanelPointing.Location = new System.Drawing.Point(624, 616);
+            this.PanelPointing.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.PanelPointing.Name = "PanelPointing";
-            this.PanelPointing.Size = new System.Drawing.Size(583, 329);
+            this.PanelPointing.Size = new System.Drawing.Size(979, 432);
             this.PanelPointing.TabIndex = 11;
             this.PanelPointing.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelArrow_Paint);
             // 
@@ -238,9 +264,10 @@ namespace AcchimuitehoiQuest
             // 
             this.ArrowRight.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ArrowRight.BackgroundImage")));
             this.ArrowRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ArrowRight.Location = new System.Drawing.Point(395, 171);
+            this.ArrowRight.Location = new System.Drawing.Point(658, 256);
+            this.ArrowRight.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.ArrowRight.Name = "ArrowRight";
-            this.ArrowRight.Size = new System.Drawing.Size(177, 150);
+            this.ArrowRight.Size = new System.Drawing.Size(295, 225);
             this.ArrowRight.TabIndex = 3;
             this.ArrowRight.UseCompatibleTextRendering = true;
             this.ArrowRight.UseVisualStyleBackColor = true;
@@ -250,9 +277,10 @@ namespace AcchimuitehoiQuest
             // 
             this.ArrowDown.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ArrowDown.BackgroundImage")));
             this.ArrowDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ArrowDown.Location = new System.Drawing.Point(212, 171);
+            this.ArrowDown.Location = new System.Drawing.Point(341, 253);
+            this.ArrowDown.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.ArrowDown.Name = "ArrowDown";
-            this.ArrowDown.Size = new System.Drawing.Size(177, 150);
+            this.ArrowDown.Size = new System.Drawing.Size(295, 225);
             this.ArrowDown.TabIndex = 2;
             this.ArrowDown.UseVisualStyleBackColor = true;
             this.ArrowDown.Click += new System.EventHandler(this.ArrowDown_Click);
@@ -261,9 +289,10 @@ namespace AcchimuitehoiQuest
             // 
             this.ArrowLeft.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ArrowLeft.BackgroundImage")));
             this.ArrowLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ArrowLeft.Location = new System.Drawing.Point(29, 171);
+            this.ArrowLeft.Location = new System.Drawing.Point(35, 253);
+            this.ArrowLeft.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.ArrowLeft.Name = "ArrowLeft";
-            this.ArrowLeft.Size = new System.Drawing.Size(177, 150);
+            this.ArrowLeft.Size = new System.Drawing.Size(295, 225);
             this.ArrowLeft.TabIndex = 1;
             this.ArrowLeft.UseVisualStyleBackColor = true;
             this.ArrowLeft.Click += new System.EventHandler(this.ArrowLeft_Click);
@@ -272,32 +301,22 @@ namespace AcchimuitehoiQuest
             // 
             this.ArrowUp.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ArrowUp.BackgroundImage")));
             this.ArrowUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ArrowUp.Location = new System.Drawing.Point(212, 15);
+            this.ArrowUp.Location = new System.Drawing.Point(341, 23);
+            this.ArrowUp.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.ArrowUp.Name = "ArrowUp";
-            this.ArrowUp.Size = new System.Drawing.Size(177, 150);
+            this.ArrowUp.Size = new System.Drawing.Size(295, 225);
             this.ArrowUp.TabIndex = 0;
             this.ArrowUp.UseVisualStyleBackColor = true;
             this.ArrowUp.Click += new System.EventHandler(this.ArrowUp_Click);
-            // 
-            // GolemHP1
-            // 
-            this.GolemHP1.BackColor = System.Drawing.Color.Transparent;
-            this.GolemHP1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("GolemHP1.BackgroundImage")));
-            this.GolemHP1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.GolemHP1.Location = new System.Drawing.Point(-2, 0);
-            this.GolemHP1.Name = "GolemHP1";
-            this.GolemHP1.Size = new System.Drawing.Size(50, 50);
-            this.GolemHP1.TabIndex = 7;
-            this.GolemHP1.TabStop = false;
-            this.GolemHP1.Click += new System.EventHandler(this.GolemHP1_Click);
             // 
             // SlimeHpPanel
             // 
             this.SlimeHpPanel.BackColor = System.Drawing.Color.Transparent;
             this.SlimeHpPanel.Controls.Add(this.SlimeHP);
-            this.SlimeHpPanel.Location = new System.Drawing.Point(821, 185);
+            this.SlimeHpPanel.Location = new System.Drawing.Point(1368, 278);
+            this.SlimeHpPanel.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.SlimeHpPanel.Name = "SlimeHpPanel";
-            this.SlimeHpPanel.Size = new System.Drawing.Size(53, 55);
+            this.SlimeHpPanel.Size = new System.Drawing.Size(88, 82);
             this.SlimeHpPanel.TabIndex = 13;
             // 
             // DemonHpPanel
@@ -306,9 +325,10 @@ namespace AcchimuitehoiQuest
             this.DemonHpPanel.Controls.Add(this.DemonHP3);
             this.DemonHpPanel.Controls.Add(this.DemonHP1);
             this.DemonHpPanel.Controls.Add(this.DemonHP2);
-            this.DemonHpPanel.Location = new System.Drawing.Point(773, 186);
+            this.DemonHpPanel.Location = new System.Drawing.Point(1288, 279);
+            this.DemonHpPanel.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.DemonHpPanel.Name = "DemonHpPanel";
-            this.DemonHpPanel.Size = new System.Drawing.Size(147, 57);
+            this.DemonHpPanel.Size = new System.Drawing.Size(245, 86);
             this.DemonHpPanel.TabIndex = 14;
             // 
             // DemonHP3
@@ -316,9 +336,10 @@ namespace AcchimuitehoiQuest
             this.DemonHP3.BackColor = System.Drawing.Color.Transparent;
             this.DemonHP3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DemonHP3.BackgroundImage")));
             this.DemonHP3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.DemonHP3.Location = new System.Drawing.Point(99, 3);
+            this.DemonHP3.Location = new System.Drawing.Point(165, 4);
+            this.DemonHP3.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.DemonHP3.Name = "DemonHP3";
-            this.DemonHP3.Size = new System.Drawing.Size(50, 50);
+            this.DemonHP3.Size = new System.Drawing.Size(83, 75);
             this.DemonHP3.TabIndex = 15;
             this.DemonHP3.TabStop = false;
             // 
@@ -327,9 +348,10 @@ namespace AcchimuitehoiQuest
             this.DemonHP1.BackColor = System.Drawing.Color.Transparent;
             this.DemonHP1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DemonHP1.BackgroundImage")));
             this.DemonHP1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.DemonHP1.Location = new System.Drawing.Point(0, 3);
+            this.DemonHP1.Location = new System.Drawing.Point(0, 4);
+            this.DemonHP1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.DemonHP1.Name = "DemonHP1";
-            this.DemonHP1.Size = new System.Drawing.Size(50, 50);
+            this.DemonHP1.Size = new System.Drawing.Size(83, 75);
             this.DemonHP1.TabIndex = 14;
             this.DemonHP1.TabStop = false;
             // 
@@ -338,23 +360,24 @@ namespace AcchimuitehoiQuest
             this.DemonHP2.BackColor = System.Drawing.Color.Transparent;
             this.DemonHP2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DemonHP2.BackgroundImage")));
             this.DemonHP2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.DemonHP2.Location = new System.Drawing.Point(49, 3);
+            this.DemonHP2.Location = new System.Drawing.Point(82, 4);
+            this.DemonHP2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.DemonHP2.Name = "DemonHP2";
-            this.DemonHP2.Size = new System.Drawing.Size(50, 50);
+            this.DemonHP2.Size = new System.Drawing.Size(83, 75);
             this.DemonHP2.TabIndex = 13;
             this.DemonHP2.TabStop = false;
             // 
             // BattleForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1311, 778);
+            this.ClientSize = new System.Drawing.Size(2185, 1061);
+            this.Controls.Add(this.EnemyHand);
             this.Controls.Add(this.GolemHpPanel);
             this.Controls.Add(this.DemonHpPanel);
             this.Controls.Add(this.SlimeHpPanel);
-            this.Controls.Add(this.EnemyHand);
             this.Controls.Add(this.PanelPointing);
             this.Controls.Add(this.PlayerHP3);
             this.Controls.Add(this.PlayerHP2);
@@ -362,9 +385,9 @@ namespace AcchimuitehoiQuest
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.HandPanel);
             this.Controls.Add(this.EnemyApperance);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "BattleForm";
-            this.Text = "Form1";
+            this.Text = "Battle";
             this.Load += new System.EventHandler(this.BattleForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.EnemyApperance)).EndInit();
             this.HandPanel.ResumeLayout(false);
@@ -373,10 +396,10 @@ namespace AcchimuitehoiQuest
             ((System.ComponentModel.ISupportInitialize)(this.PlayerHP3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SlimeHP)).EndInit();
             this.GolemHpPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.GolemHP1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GolemHP2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EnemyHand)).EndInit();
             this.PanelPointing.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.GolemHP1)).EndInit();
             this.SlimeHpPanel.ResumeLayout(false);
             this.DemonHpPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DemonHP3)).EndInit();

@@ -16,7 +16,7 @@ namespace AcchimuitehoiQuest
         public BattleManager()
         {
             this.PlayerHP = 3;                      // プレイヤーのHPは初期値3
-            this.CurrentPhase = "バトル";
+            this.CurrentPhase = "じゃんけん"; // 初期フェーズはじゃんけん
         }
         public void SetupEnemy(Enemy enemy)        // 戦いを始めるときの処理（台本）
         {
@@ -27,7 +27,7 @@ namespace AcchimuitehoiQuest
         public void OnJankenLose()
         {
             this.PlayerHP--;                      // じゃんけんに負けたときはプレイヤーのHPを1減らす
-          
+            this.CurrentPhase = "じゃんけん"; // じゃんけんやり直し
         }
 
         public void OnJankenwin()
@@ -40,7 +40,7 @@ namespace AcchimuitehoiQuest
             // 【ガード節1】失敗した場合は、じゃんけんに戻してすぐ処理を終了する
             if (!isSuccess)
             {
-                this.CurrentPhase = "バトル";
+                this.CurrentPhase = "じゃんけん";
                 return;
             }
 

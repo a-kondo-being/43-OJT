@@ -12,9 +12,21 @@ namespace AcchimuitehoiQuest
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             button1.BackColor = Color.Transparent;
         }
+        public void SetStatus(string status)
+        {
+            try
+            {
+                label1.Text = status;
+            }
+            catch
+            {
+                // ignore
+            }
+        }
         private void buttonToTitle_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            // ダイアログを閉じるだけにして、呼び出し元（QuestForm）がタイトル表示を制御する
+            this.Close();
         }
     }
 }

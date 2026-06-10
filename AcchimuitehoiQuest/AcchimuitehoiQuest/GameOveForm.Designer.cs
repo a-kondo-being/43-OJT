@@ -1,6 +1,6 @@
 ﻿namespace AcchimuitehoiQuest
 {
-    partial class GameOveForm
+    partial class GameOverForm
     {
         /// <summary>
         /// Required designer variable.
@@ -59,7 +59,7 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.buttonBacktoTitle_Click);
             // 
-            // GameOveForm
+            // GameOverForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -68,8 +68,9 @@
             this.ClientSize = new System.Drawing.Size(1374, 769);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
-            this.Name = "GameOveForm";
-            this.Text = "GameOvweForm";
+            this.MaximizeBox = false;
+            this.Name = "GameOverForm";
+            this.Text = "GameOver";
             this.ResumeLayout(false);
 
         }

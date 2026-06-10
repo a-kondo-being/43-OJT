@@ -16,10 +16,10 @@ namespace AcchimuitehoiQuest
         private void button2_Click(object sender, EventArgs e)
 
         {
-            //QusetForm questform = new QuestForm();
-
-            //questform.Show();
-
+            QuestForm questform = new QuestForm();
+            questform.Show(this);
+            // ゲーム開始の初期化処理を呼ぶ
+            questform.StartNewGame();
             this.Hide();
 
         }

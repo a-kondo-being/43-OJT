@@ -13,6 +13,7 @@ namespace AcchimuitehoiQuest
     {
         // StageManager を利用
         private StageManager stageManager = new StageManager();
+        private BattleManager battleManager;
 
         // ユーザーが指定した絶対パス（必要ならフォールバックで使用）
         private static readonly string GolemAbsolutePath = @"..\Picture\ゴーレムダウンロード.png";
@@ -21,6 +22,48 @@ namespace AcchimuitehoiQuest
         public QuestForm()
         {
             InitializeComponent();
+        }
+        // =========================================================
+        // ★新規追加：敵が出現した「瞬間」に背景を切り替える処理
+        // =========================================================
+        private void ChangeBackgroundImage(Enemy enemy)
+        {
+            if (enemy == null) return;
+
+            if (enemy.Name.Contains("魔王"))
+            {
+                // 魔王用の背景に一瞬で切り替える
+                Questpanel2.BackgroundImage = TryLoadImage(@"..\..\Picture\魔王背景1327×829.png");
+            }
+            else
+            {
+                // スライムやゴーレムの場合は、通常の背景に戻す（必要に応じて設定）
+                // Questpanel2.BackgroundImage = TryLoadImage(@"..\..\Picture\通常背景.png"); 
+                // または Properties.Resources.通常背景画像名;
+            }
+        }
+
+        // イントロ（QuestPanel1 -> QuestPanel2）の表示を一度だけ行うためのフラグ
+        private bool introShown = false;
+
+        // Questパネルの順次表示（QuestPanel1 を表示してから QuestPanel2 を表示）
+        private async Task ShowIntroSequenceAsync()
+        {
+            if (introShown) return;
+            introShown = true;
+
+            // 1枚目を表示
+            Questpanel1.Visible = true;
+            Questpanel2.Visible = false;
+            labelencount.Text = "村人：助けてくれ！";
+            await Task.Delay(2000);
+
+            labelencount.Text = "村人：魔王に攻撃をされた。\n魔王を倒してくれ！";
+            await Task.Delay(3000);
+
+            // 2枚目へ切替
+            Questpanel1.Visible = false;
+            Questpanel2.Visible = true;
         }
 
         // ファイルから安全に読み込み（ファイルロックを残さない）
@@ -140,6 +183,8 @@ namespace AcchimuitehoiQuest
                 await Task.Delay(1500);
 
                 labelslime.Text = "あいつはスライムだ。\n中々やるぞ、気をつけろ！";
+                await Task.Delay(3000);
+                labelslime.Text = hintText;
             }
             else if (enemy.Name.Contains("ゴーレム"))
             {
@@ -152,10 +197,11 @@ namespace AcchimuitehoiQuest
                 await Task.Delay(1500);
 
                 labelslime.Text = "あいつはゴーレムだ。\n硬いぞ、隙をつけ！";
+                await Task.Delay(3000);
+                labelslime.Text = hintText;
             }
             else if (enemy.Name.Contains("魔王"))
             {
-                Questpanel2.BackgroundImage = TryLoadImage(@"..\..\Picture\魔王背景1327×829.png");
                 if (enemy.TargetDirection == 0) hintText = "魔王：フハハハ！天すら我が力に震えておる！";
                 else if (enemy.TargetDirection == 1) hintText = "魔王：深淵の闇が我を呼んでいるぞ…";
                 else if (enemy.TargetDirection == 2) hintText = "魔王：漂う魔力、実に心地よい";
@@ -164,14 +210,15 @@ namespace AcchimuitehoiQuest
                 await Task.Delay(1500);
 
                 labelslime.Text = "あれが魔王だ！\n力を合わせて倒せ！";
+                await Task.Delay(3000);
+                labelslime.Text = hintText;
             }
             else
             {
                 labelslime.Text = $"あいつは{enemy.Name}だ！";
             }
 
-            await Task.Delay(3000);
-            labelslime.Text = hintText;
+
 
             // 画像を読み込んで設定
             var img = LoadImageForEnemy(enemy);
@@ -184,24 +231,26 @@ namespace AcchimuitehoiQuest
 
         private async void QuestForm_Shown(object sender, EventArgs e)
         {
-            // --- 【1枚目】の処理開始 ---
-            Questpanel1.Visible = true;
-            Questpanel2.Visible = false;
+            // フォーム表示時にイントロの演出のみ行う（StartNewGame が実行される場合は
+            // 既に ShowIntroSequenceAsync が呼ばれるので二重表示を防ぐ）
+            await ShowIntroSequenceAsync();
+        }
 
-            labelencount.Text = "村人：助けてくれ！";
-            await Task.Delay(2000);
+        // ゲーム開始処理：TitleForm から呼び出す
+        // ゲーム開始処理：TitleForm から呼び出す
+        public async void StartNewGame()
+        {
+            // 初期化
+            stageManager = new StageManager();
+            battleManager = new BattleManager();
 
-            labelencount.Text = "村人：魔王に攻撃をされた。\n魔王を倒してくれ！";
-            await Task.Delay(3000);
+            // イントロ表示（QuestPanel1 -> QuestPanel2）
+            await ShowIntroSequenceAsync();
 
-            // --- 【2枚目】へ切り替え ---
-            Questpanel1.Visible = false;
-            Questpanel2.Visible = true;
+            // --- 最初の敵をセット ---
+            stageManager.SetupNextStage(); // CurrentEnemy をセット
+            battleManager.SetupEnemy(stageManager.CurrentEnemy);
 
-
-
-            // ここで「敵データを作成」して、画像だけを先に表示する
-            stageManager.SetupNextStage();                             // CurrentEnemy をセット
             var preImage = LoadImageForEnemy(stageManager.CurrentEnemy);
             if (preImage != null)
             {
@@ -209,21 +258,86 @@ namespace AcchimuitehoiQuest
                 pictureslime.BackgroundImageLayout = ImageLayout.Stretch;
             }
 
-            // 勇者のリアクション（ラベルはまだ "！" のまま）
+            // =========================================================
+            // ★追加：最初の敵が出現した「瞬間」に背景も切り替える！
+            // =========================================================
+            ChangeBackgroundImage(stageManager.CurrentEnemy);
+
             labelslime.Text = "！";
+            await Task.Delay(500);
+            await DisplayCurrentEnemy();
+            await Task.Delay(3000);
 
+            // ステージループ：各ステージで BattleForm をモーダル表示
+            while (true)
+            {
+                using (var battleForm = new BattleForm(battleManager, stageManager))
+                {
+                    // QuestForm を隠してバトル画面をモーダル表示
+                    this.Hide();
+                    battleForm.ShowDialog(this);
+                    this.Show();
+                }
 
-            // その後、セリフ（と必要なら画像）を正式に表示する
-            DisplayCurrentEnemy();
+                // バトルの結果判定
+                if (battleManager.PlayerHP <= 0)
+                {
+                    // プレイヤー敗北：GameOver を表示
+                    var goForm = new GameOverForm();
+                    // 不要な画面が見えないように QuestForm を隠す
+                    this.Hide();
+                    goForm.ShowDialog(this);
 
-            // 例：次の敵へ進めたい場合は再び SetupNextStage() を呼ぶ
-            // stageManager.SetupNextStage();
-            // DisplayCurrentEnemy();
-            // await Task.Delay(3000);
+                    // ゲーム終了後はアプリケーションを終了する
+                    Application.Exit();
+                    break;
+                }
 
-            // --- この後、バトルに移行するための処理を書く ---
+                // 敵を倒した場合
+                if (battleManager.CurrentEnemy != null && battleManager.CurrentEnemy.HP <= 0)
+                {
+                    // 最終ステージ（3）をクリアしていたらリザルト（勝利）へ
+                    if (stageManager.CurrentStageNumber >= 3)
+                    {
+                        var result = new ResultForm();
+                    // 不要な画面が見えないように QuestForm を隠す
+                    this.Hide();
+                        result.SetStatus("CLEAR");
+                        result.ShowDialog(this);
+
+                    // ゲーム終了後はアプリケーションを終了する
+                    Application.Exit();
+                        break;
+                    }
+
+                    // そうでなければ次のステージへ進める
+                    stageManager.SetupNextStage();
+                    battleManager.SetupEnemy(stageManager.CurrentEnemy);
+
+                    var img = LoadImageForEnemy(stageManager.CurrentEnemy);
+                    if (img != null)
+                    {
+                        pictureslime.BackgroundImage = img;
+                        pictureslime.BackgroundImageLayout = ImageLayout.Stretch;
+                    }
+
+                    // =========================================================
+                    // ★追加：次の敵（魔王など）が出現した「瞬間」に背景も切り替える！
+                    // =========================================================
+                    ChangeBackgroundImage(stageManager.CurrentEnemy);
+
+                    await DisplayCurrentEnemy();
+                    // ヒントが表示されてからバトルに遷移するための猶予
+                    await Task.Delay(3000);
+                    // ループして次のバトルへ
+                }
+                else
+                {
+                    // 予期しない状態ならループを抜ける
+                    break; // ★修正：「break;あ」のミスを修正しました
+                }
+            }
         }
-
     }
 }
 
