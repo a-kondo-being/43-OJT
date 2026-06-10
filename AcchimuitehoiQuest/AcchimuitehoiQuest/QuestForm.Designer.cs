@@ -33,16 +33,16 @@
             this.labelslime = new System.Windows.Forms.Label();
             this.picturePlayer2 = new System.Windows.Forms.PictureBox();
             this.pictureslime = new System.Windows.Forms.PictureBox();
-            this.picPlayer = new System.Windows.Forms.PictureBox();
             this.picMurabito = new System.Windows.Forms.PictureBox();
             this.Questpanel1 = new System.Windows.Forms.Panel();
             this.labelencount = new System.Windows.Forms.Label();
+            this.picPlayer = new System.Windows.Forms.PictureBox();
             this.Questpanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picturePlayer2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureslime)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMurabito)).BeginInit();
             this.Questpanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPlayer)).BeginInit();
             this.SuspendLayout();
             // 
             // Questpanel2
@@ -94,26 +94,15 @@
             this.pictureslime.TabIndex = 7;
             this.pictureslime.TabStop = false;
             // 
-            // picPlayer
-            // 
-            this.picPlayer.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.picPlayer.BackColor = System.Drawing.Color.Transparent;
-            this.picPlayer.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPlayer.BackgroundImage")));
-            this.picPlayer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picPlayer.Location = new System.Drawing.Point(140, 223);
-            this.picPlayer.Name = "picPlayer";
-            this.picPlayer.Size = new System.Drawing.Size(392, 378);
-            this.picPlayer.TabIndex = 5;
-            this.picPlayer.TabStop = false;
-            // 
             // picMurabito
             // 
             this.picMurabito.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picMurabito.BackColor = System.Drawing.Color.Transparent;
-            this.picMurabito.Image = ((System.Drawing.Image)(resources.GetObject("picMurabito.Image")));
-            this.picMurabito.Location = new System.Drawing.Point(737, 223);
+            this.picMurabito.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picMurabito.BackgroundImage")));
+            this.picMurabito.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picMurabito.Location = new System.Drawing.Point(708, 203);
             this.picMurabito.Name = "picMurabito";
-            this.picMurabito.Size = new System.Drawing.Size(393, 378);
+            this.picMurabito.Size = new System.Drawing.Size(432, 417);
             this.picMurabito.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picMurabito.TabIndex = 4;
             this.picMurabito.TabStop = false;
@@ -121,8 +110,8 @@
             // Questpanel1
             // 
             this.Questpanel1.BackColor = System.Drawing.Color.Transparent;
-            this.Questpanel1.Controls.Add(this.labelencount);
             this.Questpanel1.Controls.Add(this.picPlayer);
+            this.Questpanel1.Controls.Add(this.labelencount);
             this.Questpanel1.Controls.Add(this.picMurabito);
             this.Questpanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Questpanel1.Location = new System.Drawing.Point(0, 0);
@@ -143,6 +132,19 @@
             this.labelencount.Text = "あいうえお";
             this.labelencount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // picPlayer
+            // 
+            this.picPlayer.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.picPlayer.BackColor = System.Drawing.Color.Transparent;
+            this.picPlayer.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picPlayer.BackgroundImage")));
+            this.picPlayer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picPlayer.Location = new System.Drawing.Point(84, 203);
+            this.picPlayer.Name = "picPlayer";
+            this.picPlayer.Size = new System.Drawing.Size(432, 417);
+            this.picPlayer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picPlayer.TabIndex = 7;
+            this.picPlayer.TabStop = false;
+            // 
             // QuestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
@@ -158,9 +160,9 @@
             this.Questpanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picturePlayer2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureslime)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMurabito)).EndInit();
             this.Questpanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picPlayer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -168,11 +170,11 @@
         #endregion
         private System.Windows.Forms.Panel Questpanel2;
         private System.Windows.Forms.Label labelslime;
-        private System.Windows.Forms.PictureBox picPlayer;
         private System.Windows.Forms.PictureBox picMurabito;
         private System.Windows.Forms.Panel Questpanel1;
         private System.Windows.Forms.Label labelencount;
         private System.Windows.Forms.PictureBox picturePlayer2;
         private System.Windows.Forms.PictureBox pictureslime;
+        private System.Windows.Forms.PictureBox picPlayer;
     }
 }

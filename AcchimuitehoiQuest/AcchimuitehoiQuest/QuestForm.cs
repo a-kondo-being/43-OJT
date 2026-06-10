@@ -49,7 +49,7 @@ namespace AcchimuitehoiQuest
             string[] candidates;
             if (enemy.Name.Contains("スライム"))
             {
-                candidates = new[] { "スライム左.png", "スライム.png", "スライムダウンロード (1).pngooo[[[.png", "slime_front.png" };
+                candidates = new[] { "スライム左.png", "スライム.png", "スライムダウンロード (1).png", "slime_front.png" };
             }
             else if (enemy.Name.Contains("ゴーレム"))
             {
