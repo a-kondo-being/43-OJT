@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AcchimuitehoiQuest
 {
-    public partial class GameOveForm : Form
+    public partial class GameOverForm : Form
     {
-        public GameOveForm()
+        public GameOverForm()
         {
             InitializeComponent();
         }

@@ -35,8 +35,8 @@
             this.pictureslime = new System.Windows.Forms.PictureBox();
             this.picMurabito = new System.Windows.Forms.PictureBox();
             this.Questpanel1 = new System.Windows.Forms.Panel();
-            this.labelencount = new System.Windows.Forms.Label();
             this.picPlayer = new System.Windows.Forms.PictureBox();
+            this.labelencount = new System.Windows.Forms.Label();
             this.Questpanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picturePlayer2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureslime)).BeginInit();
@@ -119,19 +119,6 @@
             this.Questpanel1.Size = new System.Drawing.Size(1305, 775);
             this.Questpanel1.TabIndex = 4;
             // 
-            // labelencount
-            // 
-            this.labelencount.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelencount.BackColor = System.Drawing.Color.Black;
-            this.labelencount.Font = new System.Drawing.Font("メイリオ", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.labelencount.ForeColor = System.Drawing.Color.White;
-            this.labelencount.Location = new System.Drawing.Point(131, 66);
-            this.labelencount.Name = "labelencount";
-            this.labelencount.Size = new System.Drawing.Size(1009, 105);
-            this.labelencount.TabIndex = 6;
-            this.labelencount.Text = "あいうえお";
-            this.labelencount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // picPlayer
             // 
             this.picPlayer.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -145,6 +132,19 @@
             this.picPlayer.TabIndex = 7;
             this.picPlayer.TabStop = false;
             // 
+            // labelencount
+            // 
+            this.labelencount.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelencount.BackColor = System.Drawing.Color.Black;
+            this.labelencount.Font = new System.Drawing.Font("メイリオ", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.labelencount.ForeColor = System.Drawing.Color.White;
+            this.labelencount.Location = new System.Drawing.Point(131, 66);
+            this.labelencount.Name = "labelencount";
+            this.labelencount.Size = new System.Drawing.Size(1009, 105);
+            this.labelencount.TabIndex = 6;
+            this.labelencount.Text = "あいうえお";
+            this.labelencount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // QuestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
@@ -154,8 +154,9 @@
             this.ClientSize = new System.Drawing.Size(1305, 775);
             this.Controls.Add(this.Questpanel1);
             this.Controls.Add(this.Questpanel2);
+            this.MaximizeBox = false;
             this.Name = "QuestForm";
-            this.Text = "QuestForm";
+            this.Text = "Quest";
             this.Shown += new System.EventHandler(this.QuestForm_Shown);
             this.Questpanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picturePlayer2)).EndInit();

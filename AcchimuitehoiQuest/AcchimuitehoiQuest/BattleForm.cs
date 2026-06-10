@@ -12,29 +12,46 @@ namespace AcchimuitehoiQuest
         BattleManager manager = new BattleManager();
         Jannkenn janken = new Jannkenn();
         AcchimuitehoiLogic hoiLogic = new AcchimuitehoiLogic();
-        bool isAiko = false;
+        StageManager stageManager = null;
 
-        // ★変更：Enemy単体ではなく、StageManagerごと受け取る変数を用意する
-        private StageManager currentStageManager;
-
-        // ★変更：引数を StageManager にする
-        public BattleForm(StageManager stageManager)
+        // デフォルトコンストラクタ（Designer が使う）
+        public BattleForm()
         {
             InitializeComponent();
-
-            // 渡されたステージ管理ロボットを保存しておく
-            currentStageManager = stageManager;
         }
+
+        // 依存注入用のコンストラクタ
+        public BattleForm(BattleManager manager, StageManager stageManager)
+            : this()
+        {
+            this.manager = manager ?? throw new ArgumentNullException(nameof(manager));
+            this.stageManager = stageManager; // null でも受け入れる
+        }
+        bool isAiko = false;
+
+        // StageManager の参照（QuestForm から渡されることを想定）
+        // 注意: stageManager は null でも受け入れます（後で manager.CurrentEnemy を使う）
 
         // =========================================================
         // 2. 画面が開いた瞬間（エンカウント時）の初期化処理
         // =========================================================
         private async void BattleForm_Load(object sender, EventArgs e)
         {
-            manager.SetupEnemy(currentStageManager.CurrentEnemy);
+            // manager に敵がセットされていなければ、stageManager から受け取る
+            if (manager.CurrentEnemy == null && stageManager != null && stageManager.CurrentEnemy != null)
+            {
+                manager.SetupEnemy(stageManager.CurrentEnemy);
+            }
+            if (manager.CurrentEnemy != null && manager.CurrentEnemy.Name == "魔王")
+            {
+                this.BackgroundImage = Properties.Resources.魔王背景;
+            }
+            if (manager.CurrentEnemy != null)
+            {
+                lblMessage.Text = manager.CurrentEnemy.Name + "が現れた！";
+            }
 
-            lblMessage.Text = manager.CurrentEnemy.Name + "が現れた！";
-
+            // 初期表示ではパネル類は一旦隠して、UpdateDisplay によって正しく表示させる
             HandPanel.Visible = false;
             PanelPointing.Visible = false;
             EnemyHand.Visible = false;
@@ -42,10 +59,11 @@ namespace AcchimuitehoiQuest
             PlayerHP1.Visible = (manager.PlayerHP >= 1);
             PlayerHP2.Visible = (manager.PlayerHP >= 2);
             PlayerHP3.Visible = (manager.PlayerHP >= 3);
-            SlimeHpPanel.Visible = true;
+
+            // すべての敵HPパネルを隠しておく（UpdateDisplay で正しく切り替える）
+            SlimeHpPanel.Visible = false;
             GolemHpPanel.Visible = false;
             DemonHpPanel.Visible = false;
-            SlimeHP.Visible = (manager.CurrentEnemy.HP >= 1);
 
             await System.Threading.Tasks.Task.Delay(900);
             lblMessage.Text = "じゃんけん…";
@@ -283,6 +301,18 @@ namespace AcchimuitehoiQuest
                     EnemyApperance.BackgroundImage = manager.CurrentEnemy.ImageFront;
                 }
             }
+
+            // --- ボタンの有効/無効をフェーズに合わせて切り替え ---
+            bool isJanken = (manager.CurrentPhase == "じゃんけん");
+            PlayerHandGu.Enabled = isJanken;
+            PlayerHandChoki.Enabled = isJanken;
+            PlayerHandPa.Enabled = isJanken;
+
+            PanelPointing.Enabled = !isJanken;
+            ArrowUp.Enabled = !isJanken;
+            ArrowDown.Enabled = !isJanken;
+            ArrowLeft.Enabled = !isJanken;
+            ArrowRight.Enabled = !isJanken;
         }
 
         // =========================================================
@@ -290,26 +320,27 @@ namespace AcchimuitehoiQuest
         {
             if (manager.PlayerHP <= 0)
             {
-
                 HandPanel.Enabled = false;
                 PanelPointing.Enabled = false;
-
                 UpdateDisplay();
 
+                // プレイヤーがやられたらこのバトル画面を閉じて呼び出し元へ戻す
+                await System.Threading.Tasks.Task.Delay(800);
+                this.Close();
+                return;
             }
             // 敵を倒したときの処理（CheckBattleEndの中）
             else if (manager.CurrentEnemy != null && manager.CurrentEnemy.HP <= 0)
             {
+                HandPanel.Enabled = false;
+                PanelPointing.Enabled = false;
                 lblMessage.Text = manager.CurrentEnemy.Name + " を倒した！";
                 await System.Threading.Tasks.Task.Delay(1500);
 
-                // ★ここでStageManagerに「次行くぞ！」と指示を出すだけで...
-                currentStageManager.SetupNextStage();
-
-                // もう CurrentEnemy には自動的に「ゴーレム」や「魔王」がセットされている！
-                manager.SetupEnemy(currentStageManager.CurrentEnemy);
-                UpdateDisplay();
-
+                // 敵を倒したら、このバトル画面は閉じて QuestForm に処理を戻す
+                await System.Threading.Tasks.Task.Delay(800);
+                this.Close();
+                return;
             }
         }
         // =========================================================

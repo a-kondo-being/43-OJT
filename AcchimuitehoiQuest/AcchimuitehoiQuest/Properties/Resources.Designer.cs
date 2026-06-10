@@ -63,6 +63,16 @@ namespace AcchimuitehoiQuest.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
+        internal static System.Drawing.Bitmap Title_Visual {
+            get {
+                object obj = ResourceManager.GetObject("Title_Visual", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
         internal static System.Drawing.Bitmap グー {
             get {
                 object obj = ResourceManager.GetObject("グー", resourceCulture);

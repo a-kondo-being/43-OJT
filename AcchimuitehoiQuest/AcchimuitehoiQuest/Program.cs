@@ -13,13 +13,14 @@ namespace AcchimuitehoiQuest
         {
             // スタートボタンなどが押されたときの処理
             StageManager stageManager = new StageManager();
+            BattleManager battleManager = new BattleManager();
 
             // SetupNextStage()を呼ぶと、CurrentStageNumberが1になり、スライムがCurrentEnemyに入る！
             stageManager.SetupNextStage();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BattleForm(stageManager));
+            Application.Run(new TitleForm());
         }
     }
 }

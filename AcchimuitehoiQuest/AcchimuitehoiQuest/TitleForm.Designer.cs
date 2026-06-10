@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TitleForm));
             this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -36,6 +35,7 @@
             // 
             this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.Font = new System.Drawing.Font("Mistral", 36F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -49,12 +49,14 @@
             // 
             // TitleForm
             // 
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImage = global::AcchimuitehoiQuest.Properties.Resources.Title_Visual;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1305, 773);
             this.Controls.Add(this.button2);
             this.DoubleBuffered = true;
+            this.MaximizeBox = false;
             this.Name = "TitleForm";
+            this.Text = "Start";
             this.Load += new System.EventHandler(this.TitleForm_Load);
             this.ResumeLayout(false);
 
