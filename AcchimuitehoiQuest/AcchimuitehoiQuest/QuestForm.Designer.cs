@@ -154,8 +154,10 @@
             this.ClientSize = new System.Drawing.Size(1305, 775);
             this.Controls.Add(this.Questpanel1);
             this.Controls.Add(this.Questpanel2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "QuestForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quest";
             this.Shown += new System.EventHandler(this.QuestForm_Shown);
             this.Questpanel2.ResumeLayout(false);

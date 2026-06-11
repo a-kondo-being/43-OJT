@@ -385,8 +385,10 @@ namespace AcchimuitehoiQuest
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.HandPanel);
             this.Controls.Add(this.EnemyApperance);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "BattleForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Battle";
             this.Load += new System.EventHandler(this.BattleForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.EnemyApperance)).EndInit();

@@ -68,8 +68,10 @@
             this.ClientSize = new System.Drawing.Size(1374, 769);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "GameOverForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GameOver";
             this.ResumeLayout(false);
 

@@ -67,8 +67,10 @@
             this.ClientSize = new System.Drawing.Size(1193, 718);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MinimizeBox = false;
             this.Name = "ResultForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Result";
             this.ResumeLayout(false);
 
