@@ -1,6 +1,8 @@
 ﻿using AcchiMuitehoiQuest;
 using System;
 using System.Drawing;
+using System.IO;
+using WMPLib;
 using System.Windows.Forms;
 
 namespace AcchimuitehoiQuest
@@ -30,6 +32,8 @@ namespace AcchimuitehoiQuest
             try { if (PanelPointing != null) PanelPointing.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(PanelPointing, true, null); } catch { }
             try { if (EnemyApperance != null) EnemyApperance.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(EnemyApperance, true, null); } catch { }
             try { if (EnemyHand != null) EnemyHand.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(EnemyHand, true, null); } catch { }
+            // バトルBGM管理（フォーム終了時に停止するため、FormClosed を購読）
+            this.FormClosed += BattleForm_FormClosed;
         }
 
         // 依存注入用のコンストラクタ
@@ -39,7 +43,23 @@ namespace AcchimuitehoiQuest
             this.manager = manager ?? throw new ArgumentNullException(nameof(manager));
             this.stageManager = stageManager; // null でも受け入れる
         }
+        // BGM 再生用プレイヤー（WMPLib の参照を利用）
+        private WindowsMediaPlayer bgmPlayer;
         bool isAiko = false;
+
+        // プレイヤー初期化（呼び出し時に一度だけ初期化される）
+        private void InitializeBgmPlayer()
+        {
+            try
+            {
+                if (bgmPlayer == null)
+                {
+                    bgmPlayer = new WindowsMediaPlayer();
+                    try { bgmPlayer.settings.setMode("loop", true); } catch { }
+                }
+            }
+            catch { }
+        }
 
         // StageManager の参照（QuestForm から渡されることを想定）
         // 注意: stageManager は null でも受け入れます（後で manager.CurrentEnemy を使う）
@@ -62,6 +82,23 @@ namespace AcchimuitehoiQuest
             {
                 lblMessage.Text = manager.CurrentEnemy.Name + "が現れた！";
             }
+
+            // --- ここで敵に応じたBGMを再生（実行ファイルと同じフォルダに mp3 を配置してください） ---
+            try
+            {
+                if (manager.CurrentEnemy != null)
+                {
+                    InitializeBgmPlayer();
+                    string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+                    string fileName = (manager.CurrentEnemy.Name == "魔王") ? "魔王バトルBGM.mp3" : "バトルBGM.mp3";
+                    string path = Path.Combine(baseDir, fileName);
+                    if (File.Exists(path) && bgmPlayer != null)
+                    {
+                        try { bgmPlayer.URL = path; bgmPlayer.controls.play(); } catch { }
+                    }
+                }
+            }
+            catch { }
 
             // 初期表示ではパネル類は一旦隠して、UpdateDisplay によって正しく表示させる
             HandPanel.Visible = false;
@@ -387,6 +424,20 @@ namespace AcchimuitehoiQuest
         private void EnemyApperance_Click(object sender, EventArgs e)
         {
 
+        }
+
+        // フォームが閉じられるときにBGMを停止する
+        private void BattleForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                if (bgmPlayer != null)
+                {
+                    try { bgmPlayer.controls.stop(); } catch { }
+                    try { bgmPlayer.close(); } catch { }
+                }
+            }
+            catch { }
         }
     }
 }
