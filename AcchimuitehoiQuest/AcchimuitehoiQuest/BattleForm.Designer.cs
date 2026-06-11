@@ -253,10 +253,10 @@ namespace AcchimuitehoiQuest
             this.PanelPointing.Controls.Add(this.ArrowDown);
             this.PanelPointing.Controls.Add(this.ArrowLeft);
             this.PanelPointing.Controls.Add(this.ArrowUp);
-            this.PanelPointing.Location = new System.Drawing.Point(624, 616);
+            this.PanelPointing.Location = new System.Drawing.Point(596, 601);
             this.PanelPointing.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.PanelPointing.Name = "PanelPointing";
-            this.PanelPointing.Size = new System.Drawing.Size(979, 432);
+            this.PanelPointing.Size = new System.Drawing.Size(979, 460);
             this.PanelPointing.TabIndex = 11;
             this.PanelPointing.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelArrow_Paint);
             // 
