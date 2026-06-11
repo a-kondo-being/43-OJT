@@ -1,10 +1,13 @@
 ﻿using AcchiMuitehoiQuest;
 using System;
+using System.Drawing;
+using System.IO;
+using WMPLib;
 using System.Windows.Forms;
 
 namespace AcchimuitehoiQuest
 {
-    public partial class BattleForm : Form
+    public partial class BattleForm : FixedSizeForm
     {
         // =========================================================
         // 1. バトルで使う「3つの管理ロボット」の準備
@@ -18,6 +21,19 @@ namespace AcchimuitehoiQuest
         public BattleForm()
         {
             InitializeComponent();
+            // 任意のクライアントサイズで固定（Designer の ClientSize を上書き）
+            SetFixedClientSize(new Size(1374, 769));
+            // Reduce flicker: enable double buffering and optimized painting
+            this.SetStyle(System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer | System.Windows.Forms.ControlStyles.AllPaintingInWmPaint | System.Windows.Forms.ControlStyles.UserPaint, true);
+            this.UpdateStyles();
+            try { typeof(System.Windows.Forms.Control).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(this, true, null); } catch { }
+            // Try to enable double buffering on heavy child controls
+            try { if (HandPanel != null) HandPanel.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(HandPanel, true, null); } catch { }
+            try { if (PanelPointing != null) PanelPointing.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(PanelPointing, true, null); } catch { }
+            try { if (EnemyApperance != null) EnemyApperance.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(EnemyApperance, true, null); } catch { }
+            try { if (EnemyHand != null) EnemyHand.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(EnemyHand, true, null); } catch { }
+            // バトルBGM管理（フォーム終了時に停止するため、FormClosed を購読）
+            this.FormClosed += BattleForm_FormClosed;
         }
 
         // 依存注入用のコンストラクタ
@@ -27,7 +43,23 @@ namespace AcchimuitehoiQuest
             this.manager = manager ?? throw new ArgumentNullException(nameof(manager));
             this.stageManager = stageManager; // null でも受け入れる
         }
+        // BGM 再生用プレイヤー（WMPLib の参照を利用）
+        private WindowsMediaPlayer bgmPlayer;
         bool isAiko = false;
+
+        // プレイヤー初期化（呼び出し時に一度だけ初期化される）
+        private void InitializeBgmPlayer()
+        {
+            try
+            {
+                if (bgmPlayer == null)
+                {
+                    bgmPlayer = new WindowsMediaPlayer();
+                    try { bgmPlayer.settings.setMode("loop", true); } catch { }
+                }
+            }
+            catch { }
+        }
 
         // StageManager の参照（QuestForm から渡されることを想定）
         // 注意: stageManager は null でも受け入れます（後で manager.CurrentEnemy を使う）
@@ -50,6 +82,23 @@ namespace AcchimuitehoiQuest
             {
                 lblMessage.Text = manager.CurrentEnemy.Name + "が現れた！";
             }
+
+            // --- ここで敵に応じたBGMを再生（実行ファイルと同じフォルダに mp3 を配置してください） ---
+            try
+            {
+                if (manager.CurrentEnemy != null)
+                {
+                    InitializeBgmPlayer();
+                    string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+                    string fileName = (manager.CurrentEnemy.Name == "魔王") ? "魔王バトルBGM.mp3" : "バトルBGM.mp3";
+                    string path = Path.Combine(baseDir, fileName);
+                    if (File.Exists(path) && bgmPlayer != null)
+                    {
+                        try { bgmPlayer.URL = path; bgmPlayer.controls.play(); } catch { }
+                    }
+                }
+            }
+            catch { }
 
             // 初期表示ではパネル類は一旦隠して、UpdateDisplay によって正しく表示させる
             HandPanel.Visible = false;
@@ -219,7 +268,7 @@ namespace AcchimuitehoiQuest
                 {
                     lblMessage.Text = "引き当てた！ 敵に1ダメージ！\nもう一度じゃんけん…";
                 }
-                else 
+                else
                 {
                     lblMessage.Text = "引き当てた！ 敵に1ダメージ！";
                 }
@@ -243,6 +292,8 @@ namespace AcchimuitehoiQuest
         // =========================================================
         private void UpdateDisplay()
         {
+            // Batch layout updates to reduce flicker
+            this.SuspendLayout();
             // --- プレイヤーのHP画像の表示制御 ---
             PlayerHP1.Visible = (manager.PlayerHP >= 1);
             PlayerHP2.Visible = (manager.PlayerHP >= 2);
@@ -280,23 +331,16 @@ namespace AcchimuitehoiQuest
             }
 
 
-            // --- ★ここを修正：パネルと敵の手の表示切り替え ---
-            if (manager.CurrentPhase == "あっち向いてホイ")
-            {
-                // 【あっち向いてホイフェーズ】のときだけ、方向パネルを出す！
-                HandPanel.Visible = false;     // じゃんけんパネルを隠す
-                PanelPointing.Visible = true;  // 方向パネルを出す
-                EnemyHand.Visible = true;     // 敵の手を隠す
-            }
-            else
-            {
-                // 【じゃんけんフェーズ】や、最初の【エンカウント時（バトル）】など、
-                // あっち向いてホイ以外のときは「絶対に」こちらを通るようにします
-                HandPanel.Visible = true;      // じゃんけんパネルを出す
-                PanelPointing.Visible = false; // ★方向パネルを絶対に隠す！
-                EnemyHand.Visible = true;      // 敵の手を出す
+            // --- パネルと敵の手の表示切り替え ---
+            bool isHoi = (manager.CurrentPhase == "あっち向いてホイ");
+            HandPanel.Visible = !isHoi;
+            PanelPointing.Visible = isHoi;
+            EnemyHand.Visible = true; // 常に表示（画像差し替えで変化する）
 
-                if (manager.CurrentEnemy != null)
+            if (manager.CurrentEnemy != null)
+            {
+                // Only update appearance image when necessary to avoid re-rendering
+                if (EnemyApperance.BackgroundImage != manager.CurrentEnemy.ImageFront)
                 {
                     EnemyApperance.BackgroundImage = manager.CurrentEnemy.ImageFront;
                 }
@@ -313,6 +357,8 @@ namespace AcchimuitehoiQuest
             ArrowDown.Enabled = !isJanken;
             ArrowLeft.Enabled = !isJanken;
             ArrowRight.Enabled = !isJanken;
+
+            this.ResumeLayout();
         }
 
         // =========================================================
@@ -378,6 +424,20 @@ namespace AcchimuitehoiQuest
         private void EnemyApperance_Click(object sender, EventArgs e)
         {
 
+        }
+
+        // フォームが閉じられるときにBGMを停止する
+        private void BattleForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                if (bgmPlayer != null)
+                {
+                    try { bgmPlayer.controls.stop(); } catch { }
+                    try { bgmPlayer.close(); } catch { }
+                }
+            }
+            catch { }
         }
     }
 }

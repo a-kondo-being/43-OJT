@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace AcchimuitehoiQuest
 {
-    public partial class QuestForm : Form
+    public partial class QuestForm : FixedSizeForm
     {
         // StageManager を利用
         private StageManager stageManager = new StageManager();
@@ -22,18 +22,30 @@ namespace AcchimuitehoiQuest
         public QuestForm()
         {
             InitializeComponent();
+            // 任意のクライアントサイズで固定（Designer の ClientSize を上書き）
+            SetFixedClientSize(new Size(1374, 769));
+            // Reduce flicker by enabling double buffering and optimized painting on the form and key panels
+            this.SetStyle(System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer | System.Windows.Forms.ControlStyles.AllPaintingInWmPaint | System.Windows.Forms.ControlStyles.UserPaint, true);
+            this.UpdateStyles();
+            try { typeof(System.Windows.Forms.Control).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(this, true, null); } catch { }
+            if (Questpanel1 != null) { try { Questpanel1.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(Questpanel1, true, null); } catch { } }
+            if (Questpanel2 != null) { try { Questpanel2.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(Questpanel2, true, null); } catch { } }
         }
         // =========================================================
         // ★新規追加：敵が出現した「瞬間」に背景を切り替える処理
         // =========================================================
-        private void ChangeBackgroundImage(Enemy enemy)
+        private async Task ChangeBackgroundImage(Enemy enemy)
         {
             if (enemy == null) return;
 
             if (enemy.Name.Contains("魔王"))
             {
-                // 魔王用の背景に一瞬で切り替える
-                Questpanel2.BackgroundImage = TryLoadImage(@"..\..\Picture\魔王背景1327×829.png");
+                // 魔王用の背景に一瞬で切り替える（非同期で読み込み）
+                var img = await TryLoadImageAsync(@"..\..\Picture\魔王背景1327×829.png");
+                if (img != null)
+                {
+                    Questpanel2.BackgroundImage = img;
+                }
             }
             else
             {
@@ -82,6 +94,12 @@ namespace AcchimuitehoiQuest
             {
                 return null;
             }
+        }
+
+        // 非同期版：UI スレッドをブロックしないようにディスク I/O はバックグラウンドで行う
+        private Task<Image> TryLoadImageAsync(string path)
+        {
+            return Task.Run(() => TryLoadImage(path));
         }
 
         // Picture フォルダや候補パスを試して画像を取得
@@ -160,6 +178,15 @@ namespace AcchimuitehoiQuest
             return pictureslime?.BackgroundImage;
         }
 
+        // 非同期版：LoadImageForEnemy のディスクアクセス部分をバックグラウンドで行い、UI をブロックしない
+        private async Task<Image> LoadImageForEnemyAsync(Enemy enemy)
+        {
+            if (enemy == null) return pictureslime?.BackgroundImage;
+
+            // Run the synchronous loader in a background thread to avoid UI freezes
+            return await Task.Run(() => LoadImageForEnemy(enemy));
+        }
+
         // Enemy を元に表示を更新
         private async Task DisplayCurrentEnemy()
         {
@@ -220,8 +247,8 @@ namespace AcchimuitehoiQuest
 
 
 
-            // 画像を読み込んで設定
-            var img = LoadImageForEnemy(enemy);
+            // 画像を読み込んで設定（非同期でディスク I/O を行い UI をブロックしない）
+            var img = await LoadImageForEnemyAsync(enemy);
             if (img != null)
             {
                 pictureslime.BackgroundImage = img;
@@ -238,7 +265,7 @@ namespace AcchimuitehoiQuest
 
         // ゲーム開始処理：TitleForm から呼び出す
         // ゲーム開始処理：TitleForm から呼び出す
-        public async void StartNewGame()
+        public async Task StartNewGame()
         {
             // 初期化
             stageManager = new StageManager();
@@ -251,7 +278,7 @@ namespace AcchimuitehoiQuest
             stageManager.SetupNextStage(); // CurrentEnemy をセット
             battleManager.SetupEnemy(stageManager.CurrentEnemy);
 
-            var preImage = LoadImageForEnemy(stageManager.CurrentEnemy);
+            var preImage = await LoadImageForEnemyAsync(stageManager.CurrentEnemy);
             if (preImage != null)
             {
                 pictureslime.BackgroundImage = preImage;
@@ -261,7 +288,7 @@ namespace AcchimuitehoiQuest
             // =========================================================
             // ★追加：最初の敵が出現した「瞬間」に背景も切り替える！
             // =========================================================
-            ChangeBackgroundImage(stageManager.CurrentEnemy);
+            await ChangeBackgroundImage(stageManager.CurrentEnemy);
 
             labelslime.Text = "！";
             await Task.Delay(500);
@@ -300,13 +327,13 @@ namespace AcchimuitehoiQuest
                     if (stageManager.CurrentStageNumber >= 3)
                     {
                         var result = new ResultForm();
-                    // 不要な画面が見えないように QuestForm を隠す
-                    this.Hide();
+                        // 不要な画面が見えないように QuestForm を隠す
+                        this.Hide();
                         result.SetStatus("CLEAR");
                         result.ShowDialog(this);
 
-                    // ゲーム終了後はアプリケーションを終了する
-                    Application.Exit();
+                        // ゲーム終了後はアプリケーションを終了する
+                        Application.Exit();
                         break;
                     }
 
@@ -314,7 +341,7 @@ namespace AcchimuitehoiQuest
                     stageManager.SetupNextStage();
                     battleManager.SetupEnemy(stageManager.CurrentEnemy);
 
-                    var img = LoadImageForEnemy(stageManager.CurrentEnemy);
+                    var img = await LoadImageForEnemyAsync(stageManager.CurrentEnemy);
                     if (img != null)
                     {
                         pictureslime.BackgroundImage = img;
@@ -324,7 +351,7 @@ namespace AcchimuitehoiQuest
                     // =========================================================
                     // ★追加：次の敵（魔王など）が出現した「瞬間」に背景も切り替える！
                     // =========================================================
-                    ChangeBackgroundImage(stageManager.CurrentEnemy);
+                    await ChangeBackgroundImage(stageManager.CurrentEnemy);
 
                     await DisplayCurrentEnemy();
                     // ヒントが表示されてからバトルに遷移するための猶予
@@ -338,6 +365,12 @@ namespace AcchimuitehoiQuest
                 }
             }
         }
+
+        private void labelencount_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+
 
