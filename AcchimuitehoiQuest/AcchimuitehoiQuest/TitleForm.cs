@@ -4,11 +4,13 @@ using System.Windows.Forms;
 
 namespace AcchimuitehoiQuest
 {
-    public partial class TitleForm : Form
+    public partial class TitleForm : FixedSizeForm
     {
         public TitleForm()
         {
             InitializeComponent();
+            // 任意のクライアントサイズで固定（Designer の ClientSize を上書き）
+            SetFixedClientSize(new Size(1374, 769));
             // Enable transparent backcolor support
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             // Reduce flicker by enabling double buffering and optimized painting

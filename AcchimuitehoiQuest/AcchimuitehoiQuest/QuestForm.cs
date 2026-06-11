@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace AcchimuitehoiQuest
 {
-    public partial class QuestForm : Form
+    public partial class QuestForm : FixedSizeForm
     {
         // StageManager を利用
         private StageManager stageManager = new StageManager();
@@ -22,6 +22,8 @@ namespace AcchimuitehoiQuest
         public QuestForm()
         {
             InitializeComponent();
+            // 任意のクライアントサイズで固定（Designer の ClientSize を上書き）
+            SetFixedClientSize(new Size(1374, 769));
             // Reduce flicker by enabling double buffering and optimized painting on the form and key panels
             this.SetStyle(System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer | System.Windows.Forms.ControlStyles.AllPaintingInWmPaint | System.Windows.Forms.ControlStyles.UserPaint, true);
             this.UpdateStyles();
@@ -362,6 +364,11 @@ namespace AcchimuitehoiQuest
                     break; // ★修正：「break;あ」のミスを修正しました
                 }
             }
+        }
+
+        private void labelencount_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

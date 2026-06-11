@@ -15,7 +15,7 @@ namespace AcchimuitehoiQuest
 
         public BattleManager()
         {
-            this.PlayerHP = 3;                      // プレイヤーのHPは初期値3
+            this.PlayerHP = 300;                      // プレイヤーのHPは初期値3
             this.CurrentPhase = "じゃんけん"; // 初期フェーズはじゃんけん
         }
         public void SetupEnemy(Enemy enemy)        // 戦いを始めるときの処理（台本）

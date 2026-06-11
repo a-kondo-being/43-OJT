@@ -4,11 +4,13 @@ using System.Windows.Forms;
 
 namespace AcchimuitehoiQuest
 {
-    public partial class ResultForm : Form
+    public partial class ResultForm : FixedSizeForm
     {
         public ResultForm()
         {
             InitializeComponent();
+            // 任意のクライアントサイズで固定（Designer の ClientSize を上書き）
+            SetFixedClientSize(new Size(1374, 769));
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             button1.BackColor = Color.Transparent;
         }

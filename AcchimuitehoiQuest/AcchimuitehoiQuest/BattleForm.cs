@@ -1,10 +1,11 @@
 ﻿using AcchiMuitehoiQuest;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace AcchimuitehoiQuest
 {
-    public partial class BattleForm : Form
+    public partial class BattleForm : FixedSizeForm
     {
         // =========================================================
         // 1. バトルで使う「3つの管理ロボット」の準備
@@ -18,6 +19,8 @@ namespace AcchimuitehoiQuest
         public BattleForm()
         {
             InitializeComponent();
+            // 任意のクライアントサイズで固定（Designer の ClientSize を上書き）
+            SetFixedClientSize(new Size(1374, 769));
             // Reduce flicker: enable double buffering and optimized painting
             this.SetStyle(System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer | System.Windows.Forms.ControlStyles.AllPaintingInWmPaint | System.Windows.Forms.ControlStyles.UserPaint, true);
             this.UpdateStyles();
