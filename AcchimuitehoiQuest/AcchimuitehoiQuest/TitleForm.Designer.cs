@@ -54,6 +54,7 @@
             this.ClientSize = new System.Drawing.Size(1305, 773);
             this.Controls.Add(this.button2);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "TitleForm";
             this.Text = "Start";
@@ -67,4 +68,5 @@
         private System.Windows.Forms.Button button2;
     }
 }
+
 

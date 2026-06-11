@@ -18,6 +18,15 @@ namespace AcchimuitehoiQuest
         public BattleForm()
         {
             InitializeComponent();
+            // Reduce flicker: enable double buffering and optimized painting
+            this.SetStyle(System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer | System.Windows.Forms.ControlStyles.AllPaintingInWmPaint | System.Windows.Forms.ControlStyles.UserPaint, true);
+            this.UpdateStyles();
+            try { typeof(System.Windows.Forms.Control).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(this, true, null); } catch { }
+            // Try to enable double buffering on heavy child controls
+            try { if (HandPanel != null) HandPanel.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(HandPanel, true, null); } catch { }
+            try { if (PanelPointing != null) PanelPointing.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(PanelPointing, true, null); } catch { }
+            try { if (EnemyApperance != null) EnemyApperance.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(EnemyApperance, true, null); } catch { }
+            try { if (EnemyHand != null) EnemyHand.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(EnemyHand, true, null); } catch { }
         }
 
         // 依存注入用のコンストラクタ
@@ -219,7 +228,7 @@ namespace AcchimuitehoiQuest
                 {
                     lblMessage.Text = "引き当てた！ 敵に1ダメージ！\nもう一度じゃんけん…";
                 }
-                else 
+                else
                 {
                     lblMessage.Text = "引き当てた！ 敵に1ダメージ！";
                 }
@@ -243,6 +252,8 @@ namespace AcchimuitehoiQuest
         // =========================================================
         private void UpdateDisplay()
         {
+            // Batch layout updates to reduce flicker
+            this.SuspendLayout();
             // --- プレイヤーのHP画像の表示制御 ---
             PlayerHP1.Visible = (manager.PlayerHP >= 1);
             PlayerHP2.Visible = (manager.PlayerHP >= 2);
@@ -280,23 +291,16 @@ namespace AcchimuitehoiQuest
             }
 
 
-            // --- ★ここを修正：パネルと敵の手の表示切り替え ---
-            if (manager.CurrentPhase == "あっち向いてホイ")
-            {
-                // 【あっち向いてホイフェーズ】のときだけ、方向パネルを出す！
-                HandPanel.Visible = false;     // じゃんけんパネルを隠す
-                PanelPointing.Visible = true;  // 方向パネルを出す
-                EnemyHand.Visible = true;     // 敵の手を隠す
-            }
-            else
-            {
-                // 【じゃんけんフェーズ】や、最初の【エンカウント時（バトル）】など、
-                // あっち向いてホイ以外のときは「絶対に」こちらを通るようにします
-                HandPanel.Visible = true;      // じゃんけんパネルを出す
-                PanelPointing.Visible = false; // ★方向パネルを絶対に隠す！
-                EnemyHand.Visible = true;      // 敵の手を出す
+            // --- パネルと敵の手の表示切り替え ---
+            bool isHoi = (manager.CurrentPhase == "あっち向いてホイ");
+            HandPanel.Visible = !isHoi;
+            PanelPointing.Visible = isHoi;
+            EnemyHand.Visible = true; // 常に表示（画像差し替えで変化する）
 
-                if (manager.CurrentEnemy != null)
+            if (manager.CurrentEnemy != null)
+            {
+                // Only update appearance image when necessary to avoid re-rendering
+                if (EnemyApperance.BackgroundImage != manager.CurrentEnemy.ImageFront)
                 {
                     EnemyApperance.BackgroundImage = manager.CurrentEnemy.ImageFront;
                 }
@@ -313,6 +317,8 @@ namespace AcchimuitehoiQuest
             ArrowDown.Enabled = !isJanken;
             ArrowLeft.Enabled = !isJanken;
             ArrowRight.Enabled = !isJanken;
+
+            this.ResumeLayout();
         }
 
         // =========================================================
@@ -381,3 +387,4 @@ namespace AcchimuitehoiQuest
         }
     }
 }
+

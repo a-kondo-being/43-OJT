@@ -9,7 +9,13 @@ namespace AcchimuitehoiQuest
         public TitleForm()
         {
             InitializeComponent();
+            // Enable transparent backcolor support
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            // Reduce flicker by enabling double buffering and optimized painting
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
+            this.UpdateStyles();
+            // Ensure controls that use protected DoubleBuffered are set where possible
+            try { typeof(System.Windows.Forms.Control).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(this, true, null); } catch { }
             button2.BackColor = Color.Transparent;
         }
 
@@ -30,3 +36,5 @@ namespace AcchimuitehoiQuest
         }
     }
 }
+
+
